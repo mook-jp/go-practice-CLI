@@ -33,8 +33,7 @@ var rootCmd = &cobra.Command{
 	Use:   "goPractice",
 	Short: "create new folder and main.go",
 	Run: func(cmd *cobra.Command, args []string) {
-		// fmt.Println("aa", "bb", "cc")
-		utils.Mkdir()
+		utils.CreateNewPackage()
 	},
 }
 

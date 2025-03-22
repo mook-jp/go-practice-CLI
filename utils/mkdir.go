@@ -24,14 +24,39 @@ func gref(format string, args ...any) {
 	fmt.Printf("\033[32m"+format, args...)
 }
 
-func Mkdir() {
+func CreateFile(dirName string) error {
+	mainString := `package main
+
+func main(){
+
+}`
+
+	file, err := os.Create(dirName + "/" + "main.go")
+	if err != nil {
+		redln("ファイル作成エラー: ", err)
+		return err
+	}
+	defer file.Close()
+
+	// ファイルにデータを書き込む
+	_, err = file.WriteString(mainString)
+	if err != nil {
+		redln("書き込みエラー: ", err)
+		return err
+	}
+
+	return nil
+}
+
+func CreateNewPackage() {
+	newDirName := "gp01_xx/"
 	fileInfo, err := os.Lstat("./")
 	if err != nil {
 		fmt.Println(err)
 	}
 	fileMode := fileInfo.Mode()
 	unixPerms := fileMode & os.ModePerm // 0777 と ./のパーミッションのアンドを取得
-	if err := os.Mkdir("xx/", unixPerms); err != nil {
+	if err := os.Mkdir(newDirName, unixPerms); err != nil {
 		// 説明
 		// https://chatgpt.com/c/67cbf18e-e258-8006-afd3-b658e456531f
 		// `*os.PathError` にキャスト
@@ -58,5 +83,9 @@ func Mkdir() {
 		redln("Other error<other os.PathError>: ", err)
 	} else {
 		greln("MKDIR successfully")
+		err := CreateFile(newDirName)
+		if err != nil {
+			redln(err)
+		}
 	}
 }
