@@ -21,7 +21,7 @@ THE SOFTWARE.
 */
 package main
 
-import "goPractice/cmd"
+import "github.com/mook-jp/go-practice/cmd"
 
 func main() {
 	cmd.Execute()
