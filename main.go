@@ -1,5 +1,5 @@
 /*
-Copyright © 2025 NAME HERE <EMAIL ADDRESS>
+Copyright © 2025 mook-jp <mook24.jp@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,3 +26,11 @@ import "github.com/mook-jp/go-practice/cmd"
 func main() {
 	cmd.Execute()
 }
+
+// 追加予定の機能
+// 2.フォルダの最初の文字を変更する処理(gp -> any)
+// - replaceHead Option
+// 3.3桁のフォルダ名に対応するコマンド
+// - replaceDigits Option
+// 文字数で取得したエラーになる
+// gp5とかになっていた時にエラーになってしまう

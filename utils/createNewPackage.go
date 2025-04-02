@@ -2,27 +2,11 @@ package utils
 
 import (
 	"fmt"
+	"math"
 	"os"
+	"strconv"
 	"syscall"
 )
-
-func redln(args ...any) {
-	args = append([]any{"\033[31m"}, args...)
-	fmt.Println(args...)
-}
-
-func greln(args ...any) {
-	args = append([]any{"\033[32m"}, args...)
-	fmt.Println(args...)
-}
-
-func redf(format string, args ...any) {
-	fmt.Printf("\033[31m"+format, args...)
-}
-
-func gref(format string, args ...any) {
-	fmt.Printf("\033[32m"+format, args...)
-}
 
 func CreateFile(dirName string) error {
 	mainString := `package main
@@ -48,8 +32,53 @@ func main(){
 	return nil
 }
 
+func max(nums []int) int {
+	maxVal := math.MinInt
+	for _, val := range nums {
+		if maxVal < val {
+			maxVal = val
+		}
+	}
+	return maxVal
+}
+
+func getNewDirName() string {
+	dirPath := "./"
+	var numSlice []int
+
+	// dir内のエントリを取得
+	entries, err := os.ReadDir(dirPath)
+	if err != nil {
+		fmt.Println("エラー: ", err)
+		return ""
+	}
+
+	// フォルダーのみを表示
+	isExistsDir := false
+	for _, entry := range entries {
+		if entry.IsDir() && entry.Name()[0:2] == "gp" {
+			isExistsDir = true
+			i, err := strconv.Atoi(entry.Name()[2:4])
+			if err != nil {
+				fmt.Println("エラー: 予想しないフォルダ名(例: gtXXにて数字以外が入力されています)")
+				return ""
+			}
+			numSlice = append(numSlice, i)
+		}
+	}
+
+	newDirName := "gp01"
+	if isExistsDir {
+		newDirName = "gp" + fmt.Sprintf("%02d", max(numSlice)+1)
+	}
+	return newDirName
+}
+
 func CreateNewPackage() {
-	newDirName := "gp01_xx/"
+	newDirName := getNewDirName()
+	if newDirName == "" {
+		return
+	}
 	fileInfo, err := os.Lstat("./")
 	if err != nil {
 		fmt.Println(err)
