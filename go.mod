@@ -1,4 +1,4 @@
-module github.com/mook-jp/go-practice
+module github.com/mook-jp/gopractice-cli
 
 go 1.24.1
 

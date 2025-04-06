@@ -24,7 +24,7 @@ package cmd
 import (
 	"os"
 
-	"github.com/mook-jp/go-practice/utils"
+	"github.com/mook-jp/gopractice-cli/utils"
 	"github.com/spf13/cobra"
 )
 
