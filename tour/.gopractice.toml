@@ -1,0 +1,8 @@
+[context]
+  last_section = "04_xxxx"
+  last_subsection = "01_jjjj"
+
+[generate]
+  lesson_readme = true
+  section_readme = false
+  subsection_readme = false
