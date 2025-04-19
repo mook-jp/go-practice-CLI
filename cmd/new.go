@@ -66,10 +66,16 @@ func saveConfig(config Config) {
 var newCmd = &cobra.Command{
 	Use:   "new [lesson-name]",
 	Short: "Create a new Go lesson with automatic folder structure",
-	Args:  cobra.ExactArgs(1),
+	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		base := "tour"
-		lessonRaw := args[0]
+
+		// 引数がなければ "Lesson" をデフォルト名として使用
+		lessonRaw := "Lesson"
+		if len(args) > 0 {
+			lessonRaw = args[0]
+		}
+
 		_ = os.MkdirAll(base, os.ModePerm)
 
 		config := loadConfig()
