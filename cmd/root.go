@@ -24,17 +24,13 @@ package cmd
 import (
 	"os"
 
-	"github.com/mook-jp/gopractice-cli/utils"
 	"github.com/spf13/cobra"
 )
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "goPractice",
+	Use:   "gop-cli",
 	Short: "create new folder and main.go",
-	Run: func(cmd *cobra.Command, args []string) {
-		utils.CreateNewPackage()
-	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
